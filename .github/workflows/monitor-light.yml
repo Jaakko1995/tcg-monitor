@@ -1,0 +1,57 @@
+name: monitor-light
+
+# HTTP-kaupat (10 kpl), ei selainta. Julkinen repo -> rajattomat Actions-minuutit.
+# 15 min välein 24/7. Maltillisempi kuin */5 -> GitHubin ajastin toimittaa tasaisemmin
+# (ei throttlausta). ÄLÄ vaihda tätä turhaan: jokainen cron-muutos pysäyttää ajastimen
+# 20-40 minuutiksi. Jos haluat luotettavamman -> ulkoinen ajastin (cron-job.org).
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: tcg-monitor-light
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Hae uusin tila
+        run: git pull --ff-only origin ${{ github.ref_name }} || true
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      # Vain HTTP-kirjastot (ei Playwrightia).
+      - run: pip install --quiet --disable-pip-version-check requests beautifulsoup4 lxml
+
+      - name: Aja vahti
+        env:
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+          WEBHOOK_ALERTS_URL: ${{ secrets.WEBHOOK_ALERTS_URL }}
+          MONITOR_CONFIG_B64: ${{ secrets.MONITOR_CONFIG_B64 }}
+        run: python monitor.py --group light --state state-light.json
+
+      - name: Tallenna tila
+        if: always()
+        run: |
+          git config user.name  "tcg-monitor-bot"
+          git config user.email "actions@github.com"
+          git add state-light.json
+          git diff --cached --quiet && { echo "Ei muutoksia."; exit 0; }
+          git commit -m "chore: update state (light) [skip ci]"
+          for i in 1 2 3 4 5; do
+            git push && exit 0
+            echo "push retry $i"; sleep 5
+            git pull --rebase origin ${{ github.ref_name }} || git rebase --abort
+          done
+          exit 1

@@ -1,0 +1,62 @@
+name: monitor-browser
+
+# Vain Playwright-selainta vaativat kohteet (group "browser"). Muut ovat
+# monitor-light-workflow'ssa (HTTP, tiheämpi).
+on:
+  schedule:
+    - cron: "24,54 * * * *"     # 30 min välein (off-peak minuutit)
+  workflow_dispatch:
+
+concurrency:
+  group: tcg-monitor-browser
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Hae uusin tila
+        run: git pull --ff-only origin ${{ github.ref_name }} || true
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install --quiet --disable-pip-version-check -r requirements.txt
+
+      - name: Cache Playwright-selain
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-chromium-v1
+
+      - run: python -m playwright install --with-deps chromium
+
+      - name: Aja vahti (browser)
+        env:
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+          WEBHOOK_ALERTS_URL: ${{ secrets.WEBHOOK_ALERTS_URL }}
+          MONITOR_CONFIG_B64: ${{ secrets.MONITOR_CONFIG_B64 }}
+        run: python monitor.py --group browser --state state-browser.json
+
+      - name: Tallenna tila
+        if: always()
+        run: |
+          git config user.name  "tcg-monitor-bot"
+          git config user.email "actions@github.com"
+          git add state-browser.json
+          git diff --cached --quiet && { echo "Ei muutoksia."; exit 0; }
+          git commit -m "chore: update state (browser) [skip ci]"
+          for i in 1 2 3 4 5; do
+            git push && exit 0
+            echo "push retry $i"; sleep 5
+            git pull --rebase origin ${{ github.ref_name }} || git rebase --abort
+          done
+          exit 1

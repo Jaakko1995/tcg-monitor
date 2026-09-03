@@ -1,0 +1,33 @@
+{
+  "_comment": "Malli. Oikea config.json ei ole versionhallinnassa; tuotannossa se annetaan MONITOR_CONFIG_B64-secretina (base64(config.json)).",
+  "filters": {
+    "require_default": ["avainsana1", "avainsana2"],
+    "exclude_broad": ["ei-toivottu1", "ei-toivottu2"],
+    "exclude_all": ["aina-pois1", "aina-pois2"]
+  },
+  "sites": [
+    {
+      "key": "s01",
+      "label": "Kohde 1",
+      "group": "light",
+      "type": "woocommerce",
+      "require": true,
+      "best_effort": true,
+      "params": { "base": "https://example.com", "category_ids": [123] }
+    },
+    {
+      "key": "s02",
+      "label": "Kohde 2",
+      "group": "light",
+      "type": "shopify",
+      "params": { "domain": "example.myshopify.com", "collections": ["a", "b"] }
+    },
+    {
+      "key": "s03",
+      "label": "Kohde 3",
+      "group": "browser",
+      "type": "wix_stores",
+      "params": { "base": "https://example.com", "categories": ["all-products"] }
+    }
+  ]
+}

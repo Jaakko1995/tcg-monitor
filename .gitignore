@@ -1,0 +1,15 @@
+.env
+state.json
+t.json
+demo_state.json
+__pycache__/
+*.pyc
+.venv/
+venv/
+debug_*.html
+debug_*.png
+
+OHJEET.local.md
+NOTES.local.md
+
+config.json
