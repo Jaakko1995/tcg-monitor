@@ -1,6 +1,6 @@
 {
  "_meta": {
-  "updated": "2026-09-04T22:02:06Z"
+  "updated": "2026-09-04T22:34:14Z"
  },
  "sites": {
   "s11": {
@@ -8,52 +8,35 @@
     "s11:086f28beb2bc": {
      "first_seen": "2026-09-03T08:45:29Z",
      "in_stock": true,
-     "last_seen": "2026-09-04T22:01:13Z",
+     "last_seen": "2026-09-04T22:33:21Z",
      "preorder": false,
      "price": 37.9
     },
     "s11:1d1171fb13d7": {
      "first_seen": "2026-09-03T08:45:29Z",
      "in_stock": true,
-     "last_seen": "2026-09-04T22:01:13Z",
+     "last_seen": "2026-09-04T22:33:21Z",
      "preorder": false,
      "price": 67.9
     },
-    "s11:20a181858d26": {
-     "first_seen": "2026-09-04T20:34:58Z",
+    "s11:271bfb332f22": {
+     "first_seen": "2026-09-04T22:33:21Z",
      "in_stock": true,
-     "last_seen": "2026-09-04T20:34:58Z",
-     "missing_runs": 3,
+     "last_seen": "2026-09-04T22:33:21Z",
      "preorder": false,
-     "price": 134.9
-    },
-    "s11:22cd1d348f8a": {
-     "first_seen": "2026-09-04T20:34:58Z",
-     "in_stock": true,
-     "last_seen": "2026-09-04T20:34:58Z",
-     "missing_runs": 3,
-     "preorder": false,
-     "price": 22.9
-    },
-    "s11:301624af3b8c": {
-     "first_seen": "2026-09-04T20:34:58Z",
-     "in_stock": true,
-     "last_seen": "2026-09-04T20:34:58Z",
-     "missing_runs": 3,
-     "preorder": false,
-     "price": 6.9
+     "price": 42.9
     },
     "s11:380a2bfa1bbf": {
      "first_seen": "2026-09-03T08:45:29Z",
      "in_stock": true,
-     "last_seen": "2026-09-04T22:01:13Z",
+     "last_seen": "2026-09-04T22:33:21Z",
      "preorder": false,
      "price": 67.9
     },
     "s11:3c604e35a069": {
      "first_seen": "2026-09-04T21:33:50Z",
      "in_stock": true,
-     "last_seen": "2026-09-04T22:01:13Z",
+     "last_seen": "2026-09-04T22:33:21Z",
      "preorder": false,
      "price": 74.9
     },
@@ -61,111 +44,71 @@
      "first_seen": "2026-09-03T08:45:29Z",
      "in_stock": true,
      "last_seen": "2026-09-04T22:01:13Z",
+     "missing_runs": 1,
      "preorder": false,
      "price": 57.9
     },
     "s11:465f3ab90bff": {
      "first_seen": "2026-09-03T08:45:29Z",
      "in_stock": true,
-     "last_seen": "2026-09-04T22:01:13Z",
+     "last_seen": "2026-09-04T22:33:21Z",
      "preorder": false,
      "price": 82.9
     },
     "s11:55783bdf1dda": {
      "first_seen": "2026-09-03T08:45:29Z",
      "in_stock": true,
-     "last_seen": "2026-09-04T22:01:13Z",
+     "last_seen": "2026-09-04T22:33:21Z",
      "preorder": false,
      "price": 67.9
     },
     "s11:56382717b7ba": {
      "first_seen": "2026-09-03T08:45:29Z",
      "in_stock": true,
-     "last_seen": "2026-09-04T22:01:13Z",
+     "last_seen": "2026-09-04T22:33:21Z",
      "preorder": false,
      "price": 117.9
     },
     "s11:5cf88464621e": {
      "first_seen": "2026-09-03T08:45:29Z",
      "in_stock": true,
-     "last_seen": "2026-09-04T22:01:13Z",
+     "last_seen": "2026-09-04T22:33:21Z",
      "preorder": false,
      "price": 34.9
     },
-    "s11:5e4d2e041013": {
-     "first_seen": "2026-09-04T20:34:58Z",
+    "s11:6f11811fbea3": {
+     "first_seen": "2026-09-04T22:33:21Z",
      "in_stock": true,
-     "last_seen": "2026-09-04T20:34:58Z",
-     "missing_runs": 3,
+     "last_seen": "2026-09-04T22:33:21Z",
      "preorder": false,
-     "price": 19.9
+     "price": 74.9
     },
     "s11:787946c4d354": {
      "first_seen": "2026-09-03T08:45:29Z",
      "in_stock": true,
-     "last_seen": "2026-09-04T22:01:13Z",
+     "last_seen": "2026-09-04T22:33:21Z",
      "preorder": false,
      "price": 97.9
     },
     "s11:8587c3556eea": {
      "first_seen": "2026-09-04T02:35:14Z",
      "in_stock": true,
-     "last_seen": "2026-09-04T22:01:13Z",
+     "last_seen": "2026-09-04T22:33:21Z",
      "preorder": false,
      "price": 67.9
     },
     "s11:87b527f51ea9": {
      "first_seen": "2026-09-03T08:45:29Z",
      "in_stock": true,
-     "last_seen": "2026-09-04T22:01:13Z",
+     "last_seen": "2026-09-04T22:33:21Z",
      "preorder": false,
      "price": 67.9
-    },
-    "s11:8af4457c5613": {
-     "first_seen": "2026-09-04T20:34:58Z",
-     "in_stock": true,
-     "last_seen": "2026-09-04T20:34:58Z",
-     "missing_runs": 3,
-     "preorder": false,
-     "price": 19.9
-    },
-    "s11:8c5b48524129": {
-     "first_seen": "2026-09-04T20:34:58Z",
-     "in_stock": true,
-     "last_seen": "2026-09-04T20:34:58Z",
-     "missing_runs": 3,
-     "preorder": false,
-     "price": 55.9
-    },
-    "s11:9df856ad9743": {
-     "first_seen": "2026-09-04T20:34:58Z",
-     "in_stock": true,
-     "last_seen": "2026-09-04T20:34:58Z",
-     "missing_runs": 3,
-     "preorder": false,
-     "price": 5.2
-    },
-    "s11:9e851f70b9f0": {
-     "first_seen": "2026-09-04T20:34:58Z",
-     "in_stock": true,
-     "last_seen": "2026-09-04T20:34:58Z",
-     "missing_runs": 3,
-     "preorder": false,
-     "price": 20.9
-    },
-    "s11:a066c352aba2": {
-     "first_seen": "2026-09-04T20:34:58Z",
-     "in_stock": true,
-     "last_seen": "2026-09-04T20:34:58Z",
-     "missing_runs": 3,
-     "preorder": false,
-     "price": 45.9
     },
     "s11:b686b6cf2701": {
      "first_seen": "2026-09-03T08:45:29Z",
      "in_stock": true,
      "last_seen": "2026-09-04T21:33:50Z",
-     "missing_runs": 1,
+     "missing_runs": 2,
      "preorder": false,
      "price": 39.9
     },
@@ -173,67 +116,35 @@
      "first_seen": "2026-09-03T08:45:29Z",
      "in_stock": true,
      "last_seen": "2026-09-04T21:01:21Z",
-     "missing_runs": 2,
-     "preorder": false,
-     "price": 52.9
-    },
-    "s11:bbf67e90b079": {
-     "first_seen": "2026-09-04T20:34:58Z",
-     "in_stock": true,
-     "last_seen": "2026-09-04T20:34:58Z",
      "missing_runs": 3,
      "preorder": false,
-     "price": 155.0
+     "price": 52.9
     },
     "s11:be9f59962451": {
      "first_seen": "2026-09-03T08:45:29Z",
      "in_stock": true,
-     "last_seen": "2026-09-04T22:01:13Z",
+     "last_seen": "2026-09-04T22:33:21Z",
      "preorder": false,
      "price": 27.9
-    },
-    "s11:c71895a9284e": {
-     "first_seen": "2026-09-04T20:34:58Z",
-     "in_stock": true,
-     "last_seen": "2026-09-04T20:34:58Z",
-     "missing_runs": 3,
-     "preorder": false,
-     "price": 54.9
-    },
-    "s11:ca51365d71c1": {
-     "first_seen": "2026-09-04T20:34:58Z",
-     "in_stock": true,
-     "last_seen": "2026-09-04T20:34:58Z",
-     "missing_runs": 3,
-     "preorder": false,
-     "price": 5.9
-    },
-    "s11:d160f8e5a788": {
-     "first_seen": "2026-09-04T20:34:58Z",
-     "in_stock": true,
-     "last_seen": "2026-09-04T20:34:58Z",
-     "missing_runs": 3,
-     "preorder": false,
-     "price": 20.9
     },
     "s11:d70b20f5d0cb": {
      "first_seen": "2026-09-03T08:45:29Z",
      "in_stock": true,
-     "last_seen": "2026-09-04T22:01:13Z",
+     "last_seen": "2026-09-04T22:33:21Z",
      "preorder": false,
      "price": 177.9
     },
     "s11:df9d3aa43710": {
      "first_seen": "2026-09-04T22:01:13Z",
      "in_stock": true,
-     "last_seen": "2026-09-04T22:01:13Z",
+     "last_seen": "2026-09-04T22:33:21Z",
      "preorder": false,
      "price": 75.9
     },
     "s11:e166af7d6740": {
      "first_seen": "2026-09-03T08:45:29Z",
      "in_stock": true,
-     "last_seen": "2026-09-04T22:01:13Z",
+     "last_seen": "2026-09-04T22:33:21Z",
      "preorder": false,
      "price": 67.9
     },
@@ -241,28 +152,28 @@
      "first_seen": "2026-09-03T08:45:29Z",
      "in_stock": true,
      "last_seen": "2026-09-04T21:01:21Z",
-     "missing_runs": 2,
+     "missing_runs": 3,
      "preorder": false,
      "price": 127.9
     },
     "s11:f499e0eb30e4": {
      "first_seen": "2026-09-03T08:45:29Z",
      "in_stock": true,
-     "last_seen": "2026-09-04T22:01:13Z",
+     "last_seen": "2026-09-04T22:33:21Z",
      "preorder": false,
      "price": 42.9
     },
     "s11:fedb8ff89c35": {
      "first_seen": "2026-09-03T08:45:29Z",
      "in_stock": true,
-     "last_seen": "2026-09-04T22:01:13Z",
+     "last_seen": "2026-09-04T22:33:21Z",
      "preorder": false,
      "price": 27.9
     },
     "s11:ff12569b39b6": {
      "first_seen": "2026-09-03T08:45:29Z",
      "in_stock": true,
-     "last_seen": "2026-09-04T22:01:13Z",
+     "last_seen": "2026-09-04T22:33:21Z",
      "preorder": false,
      "price": 67.9
     }
@@ -274,14 +185,14 @@
     "s12:9de18e71b7ac": {
      "first_seen": "2026-09-03T08:46:20Z",
      "in_stock": true,
-     "last_seen": "2026-09-04T22:02:04Z",
+     "last_seen": "2026-09-04T22:34:12Z",
      "preorder": false,
      "price": 65.0
     },
     "s12:c98a08fb4941": {
      "first_seen": "2026-09-03T08:46:20Z",
      "in_stock": false,
-     "last_seen": "2026-09-04T22:02:04Z",
+     "last_seen": "2026-09-04T22:34:12Z",
      "preorder": false,
      "price": 65.0
     }
