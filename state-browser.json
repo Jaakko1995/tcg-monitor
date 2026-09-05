@@ -1,6 +1,6 @@
 {
  "_meta": {
-  "updated": "2026-09-05T15:02:23Z"
+  "updated": "2026-09-05T15:33:47Z"
  },
  "sites": {
   "s11": {
@@ -153,14 +153,14 @@
     "s12:9de18e71b7ac": {
      "first_seen": "2026-09-03T08:46:20Z",
      "in_stock": true,
-     "last_seen": "2026-09-05T15:02:22Z",
+     "last_seen": "2026-09-05T15:33:46Z",
      "preorder": false,
      "price": 65.0
     },
     "s12:c98a08fb4941": {
      "first_seen": "2026-09-03T08:46:20Z",
      "in_stock": false,
-     "last_seen": "2026-09-05T15:02:22Z",
+     "last_seen": "2026-09-05T15:33:46Z",
      "preorder": false,
      "price": 65.0
     }
