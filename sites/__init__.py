@@ -14,6 +14,7 @@ from core.models import Product
 
 from . import (
     algolia,
+    bazaar,
     hcl_commerce,
     finqu,
     nextdata_products,
@@ -30,6 +31,7 @@ FETCHERS: dict[str, Callable[[dict], list[Product]]] = {
     "woocommerce": woocommerce.fetch,
     "shopify": shopify.fetch,
     "algolia": algolia.fetch,
+    "bazaar": bazaar.fetch,
     "hcl_commerce": hcl_commerce.fetch,
     "finqu": finqu.fetch,
     "sumup": sumup.fetch,
