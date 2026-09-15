@@ -37,6 +37,25 @@ def wait_out_challenge(page, *, total_ms: int = 25000, step_ms: int = 4000) -> N
             page.wait_for_load_state("domcontentloaded")
 
 
+def _new_context(browser):
+    context = browser.new_context(
+        user_agent=UA,
+        locale="fi-FI",
+        timezone_id="Europe/Helsinki",
+        viewport={"width": 1366, "height": 900},
+        extra_http_headers={"Accept-Language": "fi-FI,fi;q=0.9,en;q=0.8"},
+    )
+    context.set_default_timeout(45000)
+
+    def _route(route):
+        if route.request.resource_type in _BLOCK_TYPES:
+            return route.abort()
+        return route.continue_()
+
+    context.route("**/*", _route)
+    return context
+
+
 @contextlib.contextmanager
 def browser_page() -> Iterator["Page"]:  # type: ignore[name-defined]
     from playwright.sync_api import sync_playwright
@@ -50,27 +69,52 @@ def browser_page() -> Iterator["Page"]:  # type: ignore[name-defined]
                 "--disable-dev-shm-usage",
             ],
         )
-        context = browser.new_context(
-            user_agent=UA,
-            locale="fi-FI",
-            timezone_id="Europe/Helsinki",
-            viewport={"width": 1366, "height": 900},
-            extra_http_headers={"Accept-Language": "fi-FI,fi;q=0.9,en;q=0.8"},
-        )
-        context.set_default_timeout(45000)
-
-        def _route(route):
-            if route.request.resource_type in _BLOCK_TYPES:
-                return route.abort()
-            return route.continue_()
-
-        context.route("**/*", _route)
+        context = _new_context(browser)
         page = context.new_page()
         try:
             yield page
         finally:
             with contextlib.suppress(Exception):
                 context.close()
+            with contextlib.suppress(Exception):
+                browser.close()
+
+
+@contextlib.contextmanager
+def browser_session():
+    """Kuten browser_page(), mutta antaa funktion jolla saa TUOREEN kontekstin/sivun
+    jokaista navigointia varten (sama selainprosessi, uusi evästetyhjä konteksti).
+
+    Havaittu: jotkut Cloudflare-suojatut kaupat näyttävät ratkeamattoman haasteen
+    toiselle peräkkäiselle navigoinnille samassa kontekstissa (sivutus), vaikka
+    ensimmäinen meni läpi ongelmitta. Tuore konteksti per sivu kiertää tämän täysin
+    (testattu: 3/3 sivua onnistui erillisillä konteksteilla, kun sama konteksti
+    jumitti jo toisella sivulla).
+
+    Käyttö:
+        with browser_session() as new_page:
+            page = new_page()
+            html = render(page, url, ...)
+            page.context.close()   # vapauta ennen seuraavaa sivua
+    """
+    from playwright.sync_api import sync_playwright
+
+    with sync_playwright() as pw:
+        browser = pw.chromium.launch(
+            headless=True,
+            args=[
+                "--disable-blink-features=AutomationControlled",
+                "--no-sandbox",
+                "--disable-dev-shm-usage",
+            ],
+        )
+
+        def _new_page():
+            return _new_context(browser).new_page()
+
+        try:
+            yield _new_page
+        finally:
             with contextlib.suppress(Exception):
                 browser.close()
 

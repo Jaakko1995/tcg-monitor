@@ -5,13 +5,14 @@ cfg: {key, list_url, product_url, cpaths: [...], max_pages}
 """
 from __future__ import annotations
 
+import contextlib
 import re
 
 from bs4 import BeautifulSoup
 
 from core.models import Product
 
-from .browser import browser_page, render
+from .browser import browser_session, render
 
 _PRICE_RE = re.compile(r"(\d[\d\s]*[.,]\d{2})\s*€")
 _PREORDER_RE = re.compile(r"ennakko|julkais|tulossa|pre-?order|saapuu", re.I)
@@ -84,14 +85,22 @@ def fetch(cfg: dict) -> list[Product]:
     max_pages = cfg.get("max_pages", 8)
 
     out: dict[str, Product] = {}
-    with browser_page() as page:
+    with browser_session() as new_page:
         for cpath in cfg["cpaths"]:
             prev_first = None
             for pg in range(1, max_pages + 1):
-                html = render(
-                    page, f"{list_url}?cPath={cpath}&page={pg}",
-                    wait_selector="td.productListing-data", challenge_wait_ms=9000,
-                )
+                # Tuore konteksti joka sivulle: sama konteksti uudelleenkäytettynä
+                # saa Cloudflaren näyttämään ratkeamattoman haasteen jo toisella
+                # peräkkäisellä navigoinnilla (havaittu eräällä kohteella).
+                page = new_page()
+                try:
+                    html = render(
+                        page, f"{list_url}?cPath={cpath}&page={pg}",
+                        wait_selector="td.productListing-data", challenge_wait_ms=9000,
+                    )
+                finally:
+                    with contextlib.suppress(Exception):
+                        page.context.close()
                 if "just a moment" in html.lower()[:2000]:
                     raise RuntimeError("Cloudflare-haaste esti sivun")
                 products = _parse(html, key, product_url)
