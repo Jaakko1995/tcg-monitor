@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup
 
 from core.models import Product
 
-from .browser import browser_session, render
+from .browser import _looks_like_challenge, browser_session, render
 
 _PRICE_RE = re.compile(r"(\d[\d\s]*[.,]\d{2})\s*€")
 _PREORDER_RE = re.compile(r"ennakko|julkais|tulossa|pre-?order|saapuu", re.I)
@@ -98,11 +98,19 @@ def fetch(cfg: dict) -> list[Product]:
                         page, f"{list_url}?cPath={cpath}&page={pg}",
                         wait_selector="td.productListing-data", challenge_wait_ms=9000,
                     )
+                    challenged = _looks_like_challenge(page)
                 finally:
                     with contextlib.suppress(Exception):
                         page.context.close()
-                if "just a moment" in html.lower()[:2000]:
+                if pg == 1 and challenged:
                     raise RuntimeError("Cloudflare-haaste esti sivun")
+                if challenged:
+                    # Myöhempi sivu jumitti haasteeseen (esim. IP-maineeseen perustuva
+                    # rajoitus GitHubin ajoympäristössä) - pysäytetään sivutus tähän,
+                    # mutta pidetään jo kerätyt tuotteet (parempi osittainen kuin ei mitään).
+                    print(f"  [huom] {cpath}: sivu {pg} jumitti Cloudflaren haasteeseen, "
+                          f"lopetetaan sivutus (kerätty tähän mennessä säilyy)")
+                    break
                 products = _parse(html, key, product_url)
                 if not products or products[0].key == prev_first:
                     break
