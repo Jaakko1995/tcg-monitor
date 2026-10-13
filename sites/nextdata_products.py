@@ -16,12 +16,30 @@ _NEXT_RE = re.compile(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', re.S)
 _PREORDER_RE = re.compile(r"ennakko|julkaisu|tulossa|pre-?order", re.I)
 
 
+_FLIGHT_RE = re.compile(r'self\.__next_f\.push\(\[\d+,("(?:[^"\\]|\\.)*")\]\)')
+
+
+def _products_from_flight(text: str) -> list[dict]:
+    """Next.js App Router: tuotteet ovat self.__next_f.push -palasissa (escapettu JSON)."""
+    try:
+        flight = "".join(json.loads(c) for c in _FLIGHT_RE.findall(text))
+        i = flight.find('"products":[')
+        if i < 0:
+            return []
+        arr, _ = json.JSONDecoder().raw_decode(flight[i + len('"products":'):])
+    except ValueError:
+        return []
+    return [p for p in arr if isinstance(p, dict)]
+
+
 def _products_from_html(text: str) -> list[dict]:
     m = _NEXT_RE.search(text)
-    if not m:
-        return []
-    data = json.loads(m.group(1))
-    return data.get("props", {}).get("pageProps", {}).get("products", []) or []
+    if m:
+        data = json.loads(m.group(1))
+        found = data.get("props", {}).get("pageProps", {}).get("products", []) or []
+        if found:
+            return found
+    return _products_from_flight(text)
 
 
 def _to_product(raw: dict, base: str, key: str, product_path: str) -> Product:
